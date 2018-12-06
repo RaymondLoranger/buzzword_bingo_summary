@@ -1,6 +1,6 @@
 defmodule Buzzword.Bingo.Summary.Table do
   @moduledoc """
-  Writes a textual representation of a `summary` to standard out.
+  Writes a textual representation of a given `summary` to standard out.
   """
 
   alias Buzzword.Bingo.{Player, Square, Summary}
