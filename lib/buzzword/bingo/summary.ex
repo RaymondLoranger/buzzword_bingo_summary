@@ -26,7 +26,7 @@ defmodule Buzzword.Bingo.Summary do
         }
 
   @doc """
-  Creates a `summary` struct from the given `game`.
+  Creates a `summary` from the given `game`.
   """
   @spec new(Game.t()) :: t | {:error, atom}
   def new(%Game{} = game) do
