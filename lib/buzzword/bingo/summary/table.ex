@@ -88,16 +88,8 @@ defmodule Buzzword.Bingo.Summary.Table do
   end
 
   @spec print_scores(%{Player.t() => pos_integer}) :: :ok
-  defp print_scores(%{}) do
-    ["\n", :underline, :light_white, "Scores", :reset, " "] |> ANSI.write()
-
-    [:deco_background, :stratos, "None (yet)"]
-    |> ANSI.format()
-    |> IO.puts()
-  end
-
   defp print_scores(scores) do
-    ["\n", :underline, :light_white, "Scores", :reset, " "] |> ANSI.write()
+    ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
     |> Enum.map_join(" ", fn {player, points} ->
@@ -110,12 +102,12 @@ defmodule Buzzword.Bingo.Summary.Table do
 
   @spec print_bingo(Player.t() | nil) :: :ok
   defp print_bingo(%Player{name: name} = _winner) do
-    ["\n", :gold_background, :stratos, "⭐️ BINGO! #{name} wins!", :reset, "\n"]
+    ["\n", :gold_background, :stratos, " ⛧👿⛧ BINGO! #{name} wins! ", :reset]
     |> ANSI.puts()
   end
 
   defp print_bingo(nil) do
-    ["\n", :deco_background, :stratos, " 🙁  No Bingo (yet)", :reset, "\n"]
+    ["\n", :deco_background, :stratos, " 🙁 No Bingo (yet) ", :reset]
     |> ANSI.puts()
   end
 end
