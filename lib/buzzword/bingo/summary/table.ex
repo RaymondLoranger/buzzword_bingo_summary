@@ -107,7 +107,7 @@ defmodule Buzzword.Bingo.Summary.Table do
   end
 
   defp print_bingo(nil) do
-    ["\n", :deco_background, :stratos, "🙁 No Bingo (yet)", :reset, "\n"]
+    ["\n", :deco_background, :stratos, "🙁  No Bingo (yet)", :reset, "\n"]
     |> ANSI.puts()
   end
 end
