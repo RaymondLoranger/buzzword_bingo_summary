@@ -7,7 +7,7 @@ defmodule Buzzword.Bingo.Summary do
   @course_ref Application.get_env(@app, :course_ref)
 
   @moduledoc """
-  Creates a `summary` struct.
+  Creates a `summary` struct for the _Multi-Player Bingo_ game.
   Also writes a textual representation of a `summary` to standard out.
   \n##### #{@course_ref}
   """
