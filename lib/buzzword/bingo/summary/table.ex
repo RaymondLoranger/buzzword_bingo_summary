@@ -22,21 +22,26 @@ defmodule Buzzword.Bingo.Summary.Table do
   defp print_squares(squares) do
     IO.write("\n")
     column_width = column_width(squares)
-    Enum.each(squares, &print_row(&1, column_width))
+    size = length(squares)
+    Enum.each(squares, &print_row(&1, column_width, size))
   end
 
-  @spec print_row([Square.t()], pos_integer) :: :ok
-  defp print_row(squares, column_width) do
+  @spec print_row([Square.t()], pos_integer, pos_integer) :: :ok
+  defp print_row(squares, column_width, size) do
     squares
-    |> Enum.map_join(" | ", &square_in_ansi_format(&1, column_width))
-    |> IO.puts()
+    |> Stream.with_index(1)
+    |> Enum.each(&print_square(&1, column_width, size))
   end
 
-  @spec square_in_ansi_format(Square.t(), pos_integer) :: String.t()
-  defp square_in_ansi_format(square, column_width) do
-    [color_of_square(square), text_in_square_padded(square, column_width)]
-    |> ANSI.format()
-    |> IO.chardata_to_string()
+  @spec print_square({Square.t(), pos_integer}, pos_integer, pos_integer) :: :ok
+  defp print_square({square, index}, column_width, size) do
+    [
+      color_of_square(square),
+      text_in_square_padded(square, column_width),
+      :reset,
+      if(index < size, do: " | ", else: "\n")
+    ]
+    |> ANSI.write()
   end
 
   @spec color_of_square(Square.t()) :: atom | [atom]
@@ -92,22 +97,28 @@ defmodule Buzzword.Bingo.Summary.Table do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
-    |> Enum.map_join(" ", fn {player, points} ->
-      [background_of_player(player), :stratos, "#{player.name}: #{points}"]
-      |> ANSI.format()
-      |> IO.chardata_to_string()
+    |> Enum.each(fn {player, points} ->
+      [
+        background_of_player(player),
+        :stratos,
+        "#{player.name}: #{points}",
+        :reset,
+        " "
+      ]
+      |> ANSI.write()
     end)
-    |> IO.puts()
+
+    IO.puts("\n")
   end
 
   @spec print_bingo(Player.t() | nil) :: :ok
   defp print_bingo(%Player{name: name} = _winner) do
-    ["\n", :gold_background, :stratos, " ⭐⭐⭐ BINGO! #{name} wins! ", :reset]
+    [:gold_background, :stratos, " ⭐⭐⭐ BINGO! #{name} wins! ", :reset]
     |> ANSI.puts()
   end
 
   defp print_bingo(nil) do
-    ["\n", :deco_background, :stratos, " 🙁  No Bingo (yet) ", :reset]
+    [:deco_background, :stratos, " 🙁  No Bingo (yet) ", :reset]
     |> ANSI.puts()
   end
 end
