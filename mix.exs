@@ -23,6 +23,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
     [
       {:mix_tasks,
        github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false},
+      {:poison, "~> 3.1"},
       {:buzzword_bingo_game, path: "../buzzword_bingo_game"},
       {:buzzword_bingo_player, path: "../buzzword_bingo_player"},
       {:buzzword_bingo_square, path: "../buzzword_bingo_square"},
