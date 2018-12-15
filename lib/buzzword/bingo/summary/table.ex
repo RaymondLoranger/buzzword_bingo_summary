@@ -48,29 +48,8 @@ defmodule Buzzword.Bingo.Summary.Table do
   defp color_of_square(square) do
     case square.marked_by do
       nil -> :light_white
-      player -> [background_of_player(player), :stratos]
+      player -> [:"#{player.color}_background", :stratos]
     end
-  end
-
-  @spec color_of_player(Player.t()) :: String.t()
-  defp color_of_player(player) do
-    case player.color do
-      "#f9cedf" -> "mauve"
-      "#d3c5f1" -> "blue_marguerite"
-      "#acc95f" -> "green_yellow"
-      "#aeeace" -> "baby_blue"
-      "#96d7b9" -> "bright_turquoise"
-      "#fce8bd" -> "portafino"
-      "#fcd8ac" -> "melon"
-      "#a4deff" -> "deep_sky_blue"
-      "#" <> __ -> "orange_red"
-      reg_color -> reg_color
-    end
-  end
-
-  @spec background_of_player(Player.t()) :: atom
-  defp background_of_player(player) do
-    :"#{color_of_player(player)}_background"
   end
 
   @spec text_in_square_padded(Square.t(), pos_integer) :: String.t()
@@ -92,16 +71,16 @@ defmodule Buzzword.Bingo.Summary.Table do
     |> Enum.max()
   end
 
-  @spec print_scores(%{Player.t() => pos_integer}) :: :ok
+  @spec print_scores([map]) :: :ok
   defp print_scores(scores) do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
-    |> Enum.each(fn {player, points} ->
+    |> Enum.each(fn %{name: name, color: color, score: score} ->
       [
-        background_of_player(player),
+        :"#{color}_background",
         :stratos,
-        "#{player.name}: #{points}",
+        "#{name}: #{score}",
         :reset,
         " "
       ]
