@@ -75,7 +75,9 @@ defmodule Buzzword.Bingo.Summary.Table do
   defp print_scores(scores) do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
-    Enum.each(scores, fn {name, %{color: color, score: score}} ->
+    scores
+    |> Enum.sort()
+    |> Enum.each(fn {name, %{color: color, score: score}} ->
       [
         :"#{color}_background",
         :stratos,
