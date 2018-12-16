@@ -22,7 +22,7 @@ defmodule Buzzword.Bingo.Summary do
 
   @type t :: %Summary{
           squares: [[Square.t()]],
-          scores: [map],
+          scores: %{},
           winner: Player.t() | nil
         }
 
@@ -33,9 +33,10 @@ defmodule Buzzword.Bingo.Summary do
   def new(%Game{} = game) do
     %Summary{
       squares: Enum.chunk_every(game.squares, game.size),
+      # Will translate to JavaScript hash table...
       scores:
-        Enum.map(game.scores, fn {player, score} ->
-          %{name: player.name, color: player.color, score: score}
+        Map.new(game.scores, fn {player, score} ->
+          {player.name, %{color: player.color, score: score}}
         end),
       winner: game.winner
     }

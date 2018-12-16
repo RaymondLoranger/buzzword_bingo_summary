@@ -37,7 +37,7 @@ defmodule Buzzword.Bingo.SummaryTest do
 
   describe "Summary.new/1" do
     test "returns a struct", %{games: games} do
-      assert %Summary{squares: squares, scores: [], winner: nil} =
+      assert %Summary{squares: squares, scores: %{}, winner: nil} =
                Summary.new(games.icy_moon)
 
       assert is_list(squares) and length(squares) == games.icy_moon.size
@@ -45,7 +45,7 @@ defmodule Buzzword.Bingo.SummaryTest do
 
     test "returns a struct in a `with` macro", %{games: games} do
       assert(
-        %Summary{squares: _squares, scores: [], winner: nil} =
+        %Summary{squares: _squares, scores: %{}, winner: nil} =
           with %Summary{} = summary <- Summary.new(games.icy_moon) do
             summary
           end
@@ -68,7 +68,7 @@ defmodule Buzzword.Bingo.SummaryTest do
 
     test "can be encoded by Poison", %{games: games} do
       assert games.marked_game |> Summary.new() |> Poison.encode!() ==
-               ~s<{"winner":{"name":"Joe","color":"light_blue"},"squares":[[{"points":101,"phrase":"A1","marked_by":{"name":"Joe","color":"light_blue"}},{"points":102,"phrase":"A2","marked_by":null},{"points":103,"phrase":"A3","marked_by":{"name":"Jim","color":"light_cyan"}}],[{"points":201,"phrase":"B1","marked_by":null},{"points":202,"phrase":"B2","marked_by":{"name":"Joe","color":"light_blue"}},{"points":203,"phrase":"B3","marked_by":null}],[{"points":301,"phrase":"C1","marked_by":{"name":"Jim","color":"light_cyan"}},{"points":302,"phrase":"C2","marked_by":null},{"points":303,"phrase":"C3","marked_by":{"name":"Joe","color":"light_blue"}}]],"scores":[{"score":606,"name":"Joe","color":"light_blue"},{"score":404,"name":"Jim","color":"light_cyan"}]}>
+               ~s<{"winner":{"name":"Joe","color":"light_blue"},"squares":[[{"points":101,"phrase":"A1","marked_by":{"name":"Joe","color":"light_blue"}},{"points":102,"phrase":"A2","marked_by":null},{"points":103,"phrase":"A3","marked_by":{"name":"Jim","color":"light_cyan"}}],[{"points":201,"phrase":"B1","marked_by":null},{"points":202,"phrase":"B2","marked_by":{"name":"Joe","color":"light_blue"}},{"points":203,"phrase":"B3","marked_by":null}],[{"points":301,"phrase":"C1","marked_by":{"name":"Jim","color":"light_cyan"}},{"points":302,"phrase":"C2","marked_by":null},{"points":303,"phrase":"C3","marked_by":{"name":"Joe","color":"light_blue"}}]],"scores":{"Joe":{"score":606,"color":"light_blue"},"Jim":{"score":404,"color":"light_cyan"}}}>
     end
   end
 end

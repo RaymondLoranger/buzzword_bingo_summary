@@ -71,12 +71,11 @@ defmodule Buzzword.Bingo.Summary.Table do
     |> Enum.max()
   end
 
-  @spec print_scores([map]) :: :ok
+  @spec print_scores(map) :: :ok
   defp print_scores(scores) do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
-    scores
-    |> Enum.each(fn %{name: name, color: color, score: score} ->
+    Enum.each(scores, fn {name, %{color: color, score: score}} ->
       [
         :"#{color}_background",
         :stratos,
