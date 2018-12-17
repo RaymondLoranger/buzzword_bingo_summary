@@ -81,7 +81,7 @@ defmodule Buzzword.Bingo.Summary.Table do
       [
         :"#{color}_background",
         :stratos,
-        "#{name}: #{score} (#{marked} squares)",
+        "#{name}: #{score} (#{marked} square#{(marked == 1 && "") || "s"})",
         :reset,
         " "
       ]
