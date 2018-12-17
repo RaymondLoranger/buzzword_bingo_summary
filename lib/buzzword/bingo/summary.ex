@@ -17,12 +17,13 @@ defmodule Buzzword.Bingo.Summary do
   alias Buzzword.Bingo.{Game, Player, Square}
 
   @derive [Poison.Encoder]
+  @derive Jason.Encoder
   @enforce_keys [:squares, :scores, :winner]
   defstruct [:squares, :scores, :winner]
 
   @type t :: %Summary{
           squares: [[Square.t()]],
-          scores: %{},
+          scores: %{String.t() => map},
           winner: Player.t() | nil
         }
 
@@ -33,10 +34,10 @@ defmodule Buzzword.Bingo.Summary do
   def new(%Game{} = game) do
     %Summary{
       squares: Enum.chunk_every(game.squares, game.size),
-      # Will translate to JavaScript hash table...
+      # Can translate to a JavaScript object...
       scores:
-        Map.new(game.scores, fn {player, score} ->
-          {player.name, %{color: player.color, score: score}}
+        Map.new(game.scores, fn {player, {score, marked}} ->
+          {player.name, %{color: player.color, score: score, marked: marked}}
         end),
       winner: game.winner
     }

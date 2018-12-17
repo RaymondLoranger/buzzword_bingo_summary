@@ -77,11 +77,11 @@ defmodule Buzzword.Bingo.Summary.Table do
 
     scores
     |> Enum.sort()
-    |> Enum.each(fn {name, %{color: color, score: score}} ->
+    |> Enum.each(fn {name, %{color: color, score: score, marked: marked}} ->
       [
         :"#{color}_background",
         :stratos,
-        "#{name}: #{score}",
+        "#{name}: #{score} (#{marked} squares)",
         :reset,
         " "
       ]
