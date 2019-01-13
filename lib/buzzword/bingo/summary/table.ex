@@ -48,9 +48,20 @@ defmodule Buzzword.Bingo.Summary.Table do
   defp color_of_square(square) do
     case square.marked_by do
       nil -> :light_white
-      player -> [:"#{player.color}_background", :stratos]
+      player -> [:"#{adapt(player.color)}_background", :stratos]
     end
   end
+
+  @spec adapt(color :: String.t()) :: adapted_color :: String.t()
+  def adapt("#a4deff"), do: "aqua"
+  def adapt("#f9cedf"), do: "orchid"
+  def adapt("#d3c5f1"), do: "moon_raker"
+  def adapt("#acc9f5"), do: "malibu"
+  def adapt("#aeeace"), do: "pale_green"
+  def adapt("#96d7b9"), do: "bondi_blue"
+  def adapt("#fce8bd"), do: "canary"
+  def adapt("#fcd8ac"), do: "dandelion"
+  def adapt(color), do: color
 
   @spec text_in_square_padded(Square.t(), pos_integer) :: String.t()
   defp text_in_square_padded(square, column_width) do
@@ -79,7 +90,7 @@ defmodule Buzzword.Bingo.Summary.Table do
     |> Enum.sort()
     |> Enum.each(fn {name, %{color: color, score: score, marked: marked}} ->
       [
-        :"#{color}_background",
+        :"#{adapt(color)}_background",
         :stratos,
         "#{name}: #{score} (#{marked} square#{(marked == 1 && "") || "s"})",
         :reset,
