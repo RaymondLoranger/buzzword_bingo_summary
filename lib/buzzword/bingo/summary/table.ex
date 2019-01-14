@@ -99,7 +99,7 @@ defmodule Buzzword.Bingo.Summary.Table do
     |> Enum.chunk_every(size)
     |> Enum.each(&print_score_chunk/1)
 
-    scores |> map_size |> IO.write()
+    scores |> map_size() |> skip() |> IO.write()
   end
 
   @spec skip(non_neg_integer) :: String.t()
