@@ -12,7 +12,7 @@ defmodule Buzzword.Bingo.Summary.Table do
   @spec format(Summary.t()) :: :ok
   def format(%Summary{} = summary) do
     print_squares(summary.squares)
-    print_scores(summary.scores)
+    print_scores(summary.scores, length(summary.squares))
     print_bingo(summary.winner)
   end
 
@@ -54,13 +54,21 @@ defmodule Buzzword.Bingo.Summary.Table do
 
   @spec adapt(color :: String.t()) :: adapted_color :: String.t()
   def adapt("#a4deff"), do: "aqua"
+  def adapt("rgb(164, 222, 255)"), do: "aqua"
   def adapt("#f9cedf"), do: "orchid"
+  def adapt("rgb(249, 206, 223)"), do: "orchid"
   def adapt("#d3c5f1"), do: "moon_raker"
+  def adapt("rgb(211, 197, 241)"), do: "moon_raker"
   def adapt("#acc9f5"), do: "malibu"
+  def adapt("rgb(172, 201, 245)"), do: "malibu"
   def adapt("#aeeace"), do: "pale_green"
+  def adapt("rgb(174, 234, 206)"), do: "pale_green"
   def adapt("#96d7b9"), do: "bondi_blue"
+  def adapt("rgb(150, 215, 185)"), do: "bondi_blue"
   def adapt("#fce8bd"), do: "canary"
+  def adapt("rgb(252, 232, 189)"), do: "canary"
   def adapt("#fcd8ac"), do: "dandelion"
+  def adapt("rgb(252, 216, 172)"), do: "dandelion"
   def adapt(color), do: color
 
   @spec text_in_square_padded(Square.t(), pos_integer) :: String.t()
@@ -82,24 +90,38 @@ defmodule Buzzword.Bingo.Summary.Table do
     |> Enum.max()
   end
 
-  @spec print_scores(map) :: :ok
-  defp print_scores(scores) do
+  @spec print_scores(map, non_neg_integer) :: :ok
+  defp print_scores(scores, size) do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
     |> Enum.sort()
-    |> Enum.each(fn {name, %{color: color, score: score, marked: marked}} ->
-      [
-        :"#{adapt(color)}_background",
-        :stratos,
-        "#{name}: #{score} (#{marked} square#{(marked == 1 && "") || "s"})",
-        :reset,
-        " "
-      ]
-      |> ANSI.write()
-    end)
+    |> Enum.chunk_every(size)
+    |> Enum.each(&print_score_chunk/1)
 
-    IO.puts("\n")
+    scores |> map_size |> IO.write()
+  end
+
+  @spec skip(non_neg_integer) :: String.t()
+  defp skip(0 = _size), do: "\n\n"
+  defp skip(_size), do: "\n"
+
+  @spec print_score_chunk(score_chunk :: [tuple]) :: :ok
+  defp print_score_chunk(scores) do
+    Enum.each(scores, &print_score/1)
+    IO.write("\n        ")
+  end
+
+  @spec print_score(score :: tuple) :: :ok
+  defp print_score({name, %{color: color, score: score, marked: marked}}) do
+    [
+      :"#{adapt(color)}_background",
+      :stratos,
+      "#{name}: #{score} (#{marked} square#{(marked == 1 && "") || "s"})",
+      :reset,
+      "\t"
+    ]
+    |> ANSI.write()
   end
 
   @spec print_bingo(Player.t() | nil) :: :ok
@@ -109,7 +131,8 @@ defmodule Buzzword.Bingo.Summary.Table do
   end
 
   defp print_bingo(nil) do
-    [:deco_background, :stratos, " 🙁  No Bingo (yet) ", :reset]
+    # [:deco_background, :stratos, " 🙁  No Bingo (yet) ", :reset]
+    [:deco_background, :stratos, " ☹ No Bingo (yet) ", :reset]
     |> ANSI.puts()
   end
 end
