@@ -29,7 +29,7 @@ defmodule Buzzword.Bingo.Summary.Table do
   @spec print_row([Square.t()], pos_integer, pos_integer) :: :ok
   defp print_row(squares, column_width, size) do
     squares
-    |> Stream.with_index(1)
+    |> Enum.with_index(1)
     |> Enum.each(&print_square(&1, column_width, size))
   end
 
@@ -85,8 +85,8 @@ defmodule Buzzword.Bingo.Summary.Table do
   defp column_width(squares) do
     squares
     |> List.flatten()
-    |> Stream.map(&text_in_square/1)
-    |> Stream.map(&String.length/1)
+    |> Enum.map(&text_in_square/1)
+    |> Enum.map(&String.length/1)
     |> Enum.max()
   end
 
