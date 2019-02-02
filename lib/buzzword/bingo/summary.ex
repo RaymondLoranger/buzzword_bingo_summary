@@ -34,7 +34,7 @@ defmodule Buzzword.Bingo.Summary do
   def new(%Game{} = game) do
     %Summary{
       squares: Enum.chunk_every(game.squares, game.size),
-      # Can translate to a JavaScript object...
+      # Can translate to a serializable JSON value...
       scores:
         Map.new(game.scores, fn {player, {score, marked}} ->
           {player.name, %{color: player.color, score: score, marked: marked}}
