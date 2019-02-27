@@ -8,7 +8,7 @@ defmodule Buzzword.Bingo.Summary do
 
   @moduledoc """
   Creates a `summary` struct for the _Multi-Player Bingo_ game.
-  Also writes a textual representation of a `summary` to standard out.
+  Also writes a `summary` or `game` as a table to standard out.
   \n##### #{@course_ref}
   """
 
@@ -46,8 +46,8 @@ defmodule Buzzword.Bingo.Summary do
   def new(_game), do: {:error, :invalid_summary_arg}
 
   @doc """
-  Writes a textual representation of the given `summary` to standard out.
+  Writes the given `summary` or `game` as a table to standard out.
   """
-  @spec table(Summary.t()) :: :ok
-  defdelegate table(summary), to: Table, as: :format
+  @spec table(Summary.t() | Game.t()) :: :ok
+  defdelegate table(summary_or_game), to: Table, as: :format
 end
