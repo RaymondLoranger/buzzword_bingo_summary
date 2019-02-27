@@ -55,23 +55,23 @@ defmodule Buzzword.Bingo.Summary.Table do
   end
 
   @spec adapt(color :: String.t()) :: adapted_color :: String.t()
-  def adapt("#a4deff"), do: "aqua"
-  def adapt("rgb(164, 222, 255)"), do: "aqua"
-  def adapt("#f9cedf"), do: "orchid"
-  def adapt("rgb(249, 206, 223)"), do: "orchid"
-  def adapt("#d3c5f1"), do: "moon_raker"
-  def adapt("rgb(211, 197, 241)"), do: "moon_raker"
-  def adapt("#acc9f5"), do: "malibu"
-  def adapt("rgb(172, 201, 245)"), do: "malibu"
-  def adapt("#aeeace"), do: "pale_green"
-  def adapt("rgb(174, 234, 206)"), do: "pale_green"
-  def adapt("#96d7b9"), do: "bondi_blue"
-  def adapt("rgb(150, 215, 185)"), do: "bondi_blue"
-  def adapt("#fce8bd"), do: "canary"
-  def adapt("rgb(252, 232, 189)"), do: "canary"
-  def adapt("#fcd8ac"), do: "dandelion"
-  def adapt("rgb(252, 216, 172)"), do: "dandelion"
-  def adapt(color), do: color
+  defp adapt("#a4deff"), do: "aqua"
+  defp adapt("rgb(164, 222, 255)"), do: "aqua"
+  defp adapt("#f9cedf"), do: "orchid"
+  defp adapt("rgb(249, 206, 223)"), do: "orchid"
+  defp adapt("#d3c5f1"), do: "moon_raker"
+  defp adapt("rgb(211, 197, 241)"), do: "moon_raker"
+  defp adapt("#acc9f5"), do: "malibu"
+  defp adapt("rgb(172, 201, 245)"), do: "malibu"
+  defp adapt("#aeeace"), do: "pale_green"
+  defp adapt("rgb(174, 234, 206)"), do: "pale_green"
+  defp adapt("#96d7b9"), do: "bondi_blue"
+  defp adapt("rgb(150, 215, 185)"), do: "bondi_blue"
+  defp adapt("#fce8bd"), do: "canary"
+  defp adapt("rgb(252, 232, 189)"), do: "canary"
+  defp adapt("#fcd8ac"), do: "dandelion"
+  defp adapt("rgb(252, 216, 172)"), do: "dandelion"
+  defp adapt(color), do: color
 
   @spec text_in_square_padded(Square.t(), pos_integer) :: String.t()
   defp text_in_square_padded(square, column_width) do
