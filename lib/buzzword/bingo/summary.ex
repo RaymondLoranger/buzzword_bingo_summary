@@ -8,7 +8,7 @@ defmodule Buzzword.Bingo.Summary do
 
   @moduledoc """
   Creates a `summary` struct for the _Multi-Player Bingo_ game.
-  Also writes a `summary` or `game` as a table to standard out.
+  Also writes a given `summary` or `game` as a table to standard out.
   \n##### #{@course_ref}
   """
 
