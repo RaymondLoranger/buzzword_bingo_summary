@@ -4,8 +4,8 @@ defmodule Buzzword.Bingo.Summary.MixProject do
   def project do
     [
       app: :buzzword_bingo_summary,
-      version: "0.1.9",
-      elixir: "~> 1.7",
+      version: "0.1.10",
+      elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -21,18 +21,17 @@ defmodule Buzzword.Bingo.Summary.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:buzzword_bingo_game, github: "RaymondLoranger/buzzword_bingo_game"},
+      {:buzzword_bingo_player, github: "RaymondLoranger/buzzword_bingo_player"},
+      {:buzzword_bingo_square, github: "RaymondLoranger/buzzword_bingo_square"},
+      {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:io_ansi_plus, "~> 0.1"},
+      {:jason, "~> 1.0"},
       {:mix_tasks,
        github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false},
-      {:poison, "~> 3.0"},
-      {:jason, "~> 1.0"},
-      {:persist_config, "~> 0.1", runtime: false},
-      {:buzzword_bingo_game, path: "../buzzword_bingo_game"},
-      {:buzzword_bingo_player, path: "../buzzword_bingo_player"},
-      {:buzzword_bingo_square, path: "../buzzword_bingo_square"},
-      {:io_ansi_plus, "~> 0.1"},
-      {:earmark, "~> 1.0", only: :dev},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
-      {:dialyxir, "~> 0.5", only: :dev, runtime: false}
+      {:persist_config, "~> 0.4", runtime: false},
+      {:poison, "~> 4.0"}
     ]
   end
 end

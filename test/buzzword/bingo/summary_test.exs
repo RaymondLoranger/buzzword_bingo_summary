@@ -31,7 +31,7 @@ defmodule Buzzword.Bingo.SummaryTest do
     bad_game = Game.new('bad-game', 4)
     games = %{icy_moon: icy_moon, bad_game: bad_game, won_game: won_game}
     players = %{joe: joe, jim: jim}
-    {:ok, games: games, players: players}
+    %{games: games, players: players}
   end
 
   describe "Summary.new/1" do
@@ -65,7 +65,7 @@ defmodule Buzzword.Bingo.SummaryTest do
       )
     end
 
-    test "scores of a won game", %{games: games, players: players} do
+    test "has scores of a won game", %{games: games, players: players} do
       {joe, jim} = {players.joe, players.jim}
 
       assert Summary.new(games.won_game).scores == %{

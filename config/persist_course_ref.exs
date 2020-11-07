@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :buzzword_bingo_summary,
   course_ref:

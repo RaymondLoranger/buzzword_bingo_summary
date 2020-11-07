@@ -4,7 +4,7 @@
 defmodule Buzzword.Bingo.Summary do
   use PersistConfig
 
-  @course_ref Application.get_env(@app, :course_ref)
+  @course_ref get_env(:course_ref)
 
   @moduledoc """
   Creates a `summary` struct for the _Multi-Player Bingo_ game.
