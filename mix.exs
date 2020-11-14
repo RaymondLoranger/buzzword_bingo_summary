@@ -4,7 +4,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
   def project do
     [
       app: :buzzword_bingo_summary,
-      version: "0.1.10",
+      version: "0.1.11",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -30,7 +30,6 @@ defmodule Buzzword.Bingo.Summary.MixProject do
       {:jason, "~> 1.0"},
       {:mix_tasks,
        github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false},
-      {:persist_config, "~> 0.4", runtime: false},
       {:poison, "~> 4.0"}
     ]
   end

@@ -2,14 +2,11 @@
 # │ Based on the course "Multi-Player Bingo" by Mike and Nicole Clark. │
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Buzzword.Bingo.Summary do
-  use PersistConfig
-
-  @course_ref get_env(:course_ref)
-
   @moduledoc """
   Creates a `summary` struct for the _Multi-Player Bingo_ game.
   Also writes a given `summary` or `game` as a table to standard out.
-  \n##### #{@course_ref}
+
+  ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
   """
 
   alias __MODULE__
