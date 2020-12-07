@@ -1,22 +1,22 @@
-defmodule Buzzword.Bingo.Summary.Table do
+defmodule Buzzword.Bingo.Summary.Formatter do
   @moduledoc """
-  Writes a given `summary` or `game` as a table to standard out.
+  Writes a `summary` or `game` as a formatted table to standard out.
   """
 
   alias Buzzword.Bingo.{Game, Player, Square, Summary}
   alias IO.ANSI.Plus, as: ANSI
 
   @doc """
-  Writes the given `summary` or `game` as a table to standard out.
+  Writes the given `summary` or `game` as a formatted table to standard out.
   """
-  @spec format(Summary.t() | Game.t()) :: :ok
-  def format(%Summary{} = summary) do
+  @spec print(Summary.t() | Game.t()) :: :ok
+  def print(%Summary{} = summary) do
     print_squares(summary.squares)
     print_scores(summary.scores, length(summary.squares))
     print_bingo(summary.winner)
   end
 
-  def format(%Game{} = game), do: game |> Summary.new() |> format()
+  def print(%Game{} = game), do: game |> Summary.new() |> print()
 
   ## Private functions
 

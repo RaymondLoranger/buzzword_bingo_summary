@@ -21,11 +21,11 @@ defmodule Buzzword.Bingo.SummaryTest do
         {"C2", 302},
         {"C3", 303}
       ])
-      |> Game.mark("A1", joe)
-      |> Game.mark("A3", jim)
-      |> Game.mark("B2", joe)
-      |> Game.mark("C1", jim)
-      |> Game.mark("C3", joe)
+      |> Game.mark_square("A1", joe)
+      |> Game.mark_square("A3", jim)
+      |> Game.mark_square("B2", joe)
+      |> Game.mark_square("C1", jim)
+      |> Game.mark_square("C3", joe)
 
     icy_moon = Game.new("icy-moon", 5)
     bad_game = Game.new('bad-game', 4)

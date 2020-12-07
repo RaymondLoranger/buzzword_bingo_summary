@@ -4,13 +4,13 @@
 defmodule Buzzword.Bingo.Summary do
   @moduledoc """
   Creates a `summary` struct for the _Multi-Player Bingo_ game.
-  Also writes a given `summary` or `game` as a table to standard out.
+  Also writes a `summary` or `game` as a formatted table to standard out.
 
   ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
   """
 
   alias __MODULE__
-  alias __MODULE__.Table
+  alias __MODULE__.Formatter
   alias Buzzword.Bingo.{Game, Player, Square}
 
   @derive [Poison.Encoder]
@@ -43,8 +43,8 @@ defmodule Buzzword.Bingo.Summary do
   def new(_game), do: {:error, :invalid_summary_arg}
 
   @doc """
-  Writes the given `summary` or `game` as a table to standard out.
+  Writes the given `summary` or `game` as a formatted table to standard out.
   """
-  @spec table(Summary.t() | Game.t()) :: :ok
-  defdelegate table(summary_or_game), to: Table, as: :format
+  @spec print(Summary.t() | Game.t()) :: :ok
+  defdelegate print(summary_or_game), to: Formatter
 end

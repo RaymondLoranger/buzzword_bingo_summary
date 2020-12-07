@@ -1,7 +1,7 @@
 # Buzzword Bingo Summary
 
 Creates a `summary` struct for the _Multi-Player Bingo_ game.
-Also writes a given `summary` or `game` as a table to standard out.
+Also writes a `summary` or `game` as a formatted table to standard out.
 
 ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
 
