@@ -16,7 +16,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
     print_bingo(summary.winner)
   end
 
-  def print(%Game{} = game), do: game |> Summary.new() |> print()
+  def print(%Game{} = game), do: Summary.new(game) |> print()
 
   ## Private functions
 
@@ -101,7 +101,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
     |> Enum.chunk_every(size)
     |> Enum.each(&print_score_chunk/1)
 
-    scores |> map_size() |> skip() |> IO.write()
+    map_size(scores) |> skip() |> IO.write()
   end
 
   @spec skip(non_neg_integer) :: String.t()
