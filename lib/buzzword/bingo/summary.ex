@@ -18,9 +18,16 @@ defmodule Buzzword.Bingo.Summary do
   @enforce_keys [:squares, :scores, :winner]
   defstruct [:squares, :scores, :winner]
 
+  @type player_score :: %{
+          color: Player.color(),
+          score: non_neg_integer,
+          marked: non_neg_integer
+        }
+  @type score :: {Player.name(), player_score}
+  @type scores :: %{Player.name() => player_score}
   @type t :: %Summary{
           squares: [[Square.t()]],
-          scores: %{String.t() => map},
+          scores: scores,
           winner: Player.t() | nil
         }
 

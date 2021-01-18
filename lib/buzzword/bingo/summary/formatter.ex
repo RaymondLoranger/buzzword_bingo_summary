@@ -24,24 +24,24 @@ defmodule Buzzword.Bingo.Summary.Formatter do
   defp print_squares(squares) do
     IO.write("\n")
     column_width = column_width(squares)
-    size = length(squares)
-    Enum.each(squares, &print_row(&1, column_width, size))
+    game_size = length(squares)
+    Enum.each(squares, &print_row(&1, column_width, game_size))
   end
 
-  @spec print_row([Square.t()], pos_integer, pos_integer) :: :ok
-  defp print_row(squares, column_width, size) do
+  @spec print_row([Square.t()], pos_integer, Game.size()) :: :ok
+  defp print_row(squares, column_width, game_size) do
     squares
     |> Enum.with_index(1)
-    |> Enum.each(&print_square(&1, column_width, size))
+    |> Enum.each(&print_square(&1, column_width, game_size))
   end
 
-  @spec print_square({Square.t(), pos_integer}, pos_integer, pos_integer) :: :ok
-  defp print_square({square, index}, column_width, size) do
+  @spec print_square({Square.t(), pos_integer}, pos_integer, Game.size()) :: :ok
+  defp print_square({square, index}, column_width, game_size) do
     [
       color_of_square(square),
       text_in_square_padded(square, column_width),
       :reset,
-      if(index < size, do: " | ", else: "\n")
+      if(index < game_size, do: " | ", else: "\n")
     ]
     |> ANSI.write()
   end
@@ -54,7 +54,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
     end
   end
 
-  @spec adapt(color :: String.t()) :: adapted_color :: String.t()
+  @spec adapt(Player.color()) :: adapted_color :: String.t()
   defp adapt("#a4deff"), do: "aqua"
   defp adapt("rgb(164, 222, 255)"), do: "aqua"
   defp adapt("#f9cedf"), do: "orchid"
@@ -92,13 +92,13 @@ defmodule Buzzword.Bingo.Summary.Formatter do
     |> Enum.max()
   end
 
-  @spec print_scores(map, non_neg_integer) :: :ok
-  defp print_scores(scores, size) do
+  @spec print_scores(Summary.scores(), Game.size()) :: :ok
+  defp print_scores(scores, game_size) do
     ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
     |> Enum.sort()
-    |> Enum.chunk_every(size)
+    |> Enum.chunk_every(game_size)
     |> Enum.each(&print_score_chunk/1)
 
     map_size(scores) |> skip() |> IO.write()
@@ -108,13 +108,13 @@ defmodule Buzzword.Bingo.Summary.Formatter do
   defp skip(0 = _size), do: "\n\n"
   defp skip(_size), do: "\n"
 
-  @spec print_score_chunk(score_chunk :: [tuple]) :: :ok
+  @spec print_score_chunk([Summary.score()]) :: :ok
   defp print_score_chunk(scores) do
     Enum.each(scores, &print_score/1)
     IO.write("\n        ")
   end
 
-  @spec print_score(score :: tuple) :: :ok
+  @spec print_score(Summary.score()) :: :ok
   defp print_score({name, %{color: color, score: score, marked: marked}}) do
     [
       :"#{adapt(color)}_background",
