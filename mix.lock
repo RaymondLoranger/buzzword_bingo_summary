@@ -1,5 +1,5 @@
 %{
-  "buzzword_bingo_game": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_game.git", "675c17d1c8ab824b74469e74a458e61edcf9952b", []},
+  "buzzword_bingo_game": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_game.git", "f57ab7ef24a8a8a2bd306c95e748cd0cd385b82d", []},
   "buzzword_bingo_player": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_player.git", "e16437dbc048a473bf69fa523a16bb55b6164344", []},
   "buzzword_bingo_square": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_square.git", "9479dcabf086b1b0241781ae09f97252ca6b745c", []},
   "buzzword_cache": {:git, "https://github.com/RaymondLoranger/buzzword_cache.git", "85a47452658b8164aca43b24ac3bff0f7d33b965", []},
