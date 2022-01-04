@@ -1,15 +1,20 @@
 defmodule Buzzword.Bingo.Summary.Formatter do
   @moduledoc """
-  Writes a `summary` or `game` as a formatted table to standard out.
+  Writes a summary or game struct as a formatted table to `:stdio`.
   """
 
   alias Buzzword.Bingo.{Game, Player, Square, Summary}
   alias IO.ANSI.Plus, as: ANSI
 
+  @dark :black
+  @light :light_white
+
   @doc """
-  Writes the given `summary` or `game` as a formatted table to standard out.
+  Writes the given summary or game struct as a formatted table to `:stdio`.
   """
   @spec print(Summary.t() | Game.t()) :: :ok
+  def print(summary_or_game)
+
   def print(%Summary{} = summary) do
     print_squares(summary.squares)
     print_scores(summary.scores, length(summary.squares))
@@ -49,8 +54,8 @@ defmodule Buzzword.Bingo.Summary.Formatter do
   @spec color_of_square(Square.t()) :: atom | [atom]
   defp color_of_square(square) do
     case square.marked_by do
-      nil -> :light_white
-      player -> [:"#{adapt(player.color)}_background", :stratos]
+      nil -> @light
+      player -> [:"#{adapt(player.color)}_background", @dark]
     end
   end
 
@@ -94,7 +99,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
 
   @spec print_scores(Summary.scores(), Game.size()) :: :ok
   defp print_scores(scores, game_size) do
-    ["\n", :underline, :light_white, "Scores:", :reset, " "] |> ANSI.write()
+    ["\n", :underline, @light, "Scores:", :reset, " "] |> ANSI.write()
 
     scores
     |> Enum.sort()
@@ -118,7 +123,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
   defp print_score({name, %{color: color, score: score, marked: marked}}) do
     [
       :"#{adapt(color)}_background",
-      :stratos,
+      @dark,
       "#{name}: #{score} (#{marked} square#{(marked == 1 && "") || "s"})",
       :reset,
       "\t"
@@ -128,13 +133,13 @@ defmodule Buzzword.Bingo.Summary.Formatter do
 
   @spec print_bingo(Player.t() | nil) :: :ok
   defp print_bingo(%Player{name: name} = _winner) do
-    [:gold_background, :stratos, " ⭐⭐⭐ BINGO! #{name} wins! ", :reset]
+    [:gold_background, @dark, " ⭐⭐⭐ BINGO! #{name} wins! ", :reset]
     |> ANSI.puts()
   end
 
   defp print_bingo(nil) do
-    # [:deco_background, :stratos, " 🙁  No Bingo (yet) ", :reset]
-    [:deco_background, :stratos, " ☹ No Bingo (yet) ", :reset]
+    # [:deco_background, @dark, " 🙁  No Bingo (yet) ", :reset]
+    [:deco_background, @dark, " ☹ No Bingo (yet) ", :reset]
     |> ANSI.puts()
   end
 end

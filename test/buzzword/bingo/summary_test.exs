@@ -6,7 +6,7 @@ defmodule Buzzword.Bingo.SummaryTest do
   doctest Summary
 
   setup_all do
-    joe = Player.new("Joe", "light_blue")
+    joe = Player.new("Joe", "light_green")
     jim = Player.new("Jim", "light_cyan")
 
     won_game =
@@ -76,12 +76,12 @@ defmodule Buzzword.Bingo.SummaryTest do
 
     test "can be encoded by Poison", %{games: games} do
       assert Summary.new(games.won_game) |> Poison.encode!() ==
-               ~s<{"winner":{"name":"Joe","color":"light_blue"},"squares":[[{"points":101,"phrase":"A1","marked_by":{"name":"Joe","color":"light_blue"}},{"points":102,"phrase":"A2","marked_by":null},{"points":103,"phrase":"A3","marked_by":{"name":"Jim","color":"light_cyan"}}],[{"points":201,"phrase":"B1","marked_by":null},{"points":202,"phrase":"B2","marked_by":{"name":"Joe","color":"light_blue"}},{"points":203,"phrase":"B3","marked_by":null}],[{"points":301,"phrase":"C1","marked_by":{"name":"Jim","color":"light_cyan"}},{"points":302,"phrase":"C2","marked_by":null},{"points":303,"phrase":"C3","marked_by":{"name":"Joe","color":"light_blue"}}]],"scores":{"Joe":{"score":606,"marked":3,"color":"light_blue"},"Jim":{"score":404,"marked":2,"color":"light_cyan"}}}>
+               ~s<{"winner":{"name":"Joe","color":"light_green"},"squares":[[{"points":101,"phrase":"A1","marked_by":{"name":"Joe","color":"light_green"}},{"points":102,"phrase":"A2","marked_by":null},{"points":103,"phrase":"A3","marked_by":{"name":"Jim","color":"light_cyan"}}],[{"points":201,"phrase":"B1","marked_by":null},{"points":202,"phrase":"B2","marked_by":{"name":"Joe","color":"light_green"}},{"points":203,"phrase":"B3","marked_by":null}],[{"points":301,"phrase":"C1","marked_by":{"name":"Jim","color":"light_cyan"}},{"points":302,"phrase":"C2","marked_by":null},{"points":303,"phrase":"C3","marked_by":{"name":"Joe","color":"light_green"}}]],"scores":{"Joe":{"score":606,"marked":3,"color":"light_green"},"Jim":{"score":404,"marked":2,"color":"light_cyan"}}}>
     end
 
     test "can be encoded by Jason", %{games: games} do
       assert Summary.new(games.won_game) |> Jason.encode!() ==
-               ~s<{"scores":{"Jim":{"color":"light_cyan","marked":2,"score":404},"Joe":{"color":"light_blue","marked":3,"score":606}},"squares":[[{"marked_by":{"color":"light_blue","name":"Joe"},"phrase":"A1","points":101},{"marked_by":null,"phrase":"A2","points":102},{"marked_by":{"color":"light_cyan","name":"Jim"},"phrase":"A3","points":103}],[{"marked_by":null,"phrase":"B1","points":201},{"marked_by":{"color":"light_blue","name":"Joe"},"phrase":"B2","points":202},{"marked_by":null,"phrase":"B3","points":203}],[{"marked_by":{"color":"light_cyan","name":"Jim"},"phrase":"C1","points":301},{"marked_by":null,"phrase":"C2","points":302},{"marked_by":{"color":"light_blue","name":"Joe"},"phrase":"C3","points":303}]],"winner":{"color":"light_blue","name":"Joe"}}>
+               ~s<{"scores":{"Jim":{"color":"light_cyan","marked":2,"score":404},"Joe":{"color":"light_green","marked":3,"score":606}},"squares":[[{"marked_by":{"color":"light_green","name":"Joe"},"phrase":"A1","points":101},{"marked_by":null,"phrase":"A2","points":102},{"marked_by":{"color":"light_cyan","name":"Jim"},"phrase":"A3","points":103}],[{"marked_by":null,"phrase":"B1","points":201},{"marked_by":{"color":"light_green","name":"Joe"},"phrase":"B2","points":202},{"marked_by":null,"phrase":"B3","points":203}],[{"marked_by":{"color":"light_cyan","name":"Jim"},"phrase":"C1","points":301},{"marked_by":null,"phrase":"C2","points":302},{"marked_by":{"color":"light_green","name":"Joe"},"phrase":"C3","points":303}]],"winner":{"color":"light_green","name":"Joe"}}>
     end
   end
 end

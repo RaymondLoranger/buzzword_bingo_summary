@@ -3,8 +3,11 @@
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Buzzword.Bingo.Summary do
   @moduledoc """
-  Creates a `summary` struct for the _Multi-Player Bingo_ game.
-  Also writes a textual representation of a `summary` to standard out.
+  A summary struct and functions for the _Multi-Player Bingo_ game.
+
+  The summary struct contains the fields `squares`, `scores` and `winner`
+  representing the characteristics of a summary in the _Multi-Player Bingo_
+  game.
 
   ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
   """
@@ -18,13 +21,17 @@ defmodule Buzzword.Bingo.Summary do
   @enforce_keys [:squares, :scores, :winner]
   defstruct [:squares, :scores, :winner]
 
+  @typedoc "A map of player attributes"
   @type player_score :: %{
           color: Player.color(),
-          score: non_neg_integer,
-          marked: non_neg_integer
+          score: Game.points_sum(),
+          marked: Game.marked_count()
         }
+  @typedoc "A tuple of player name and player score"
   @type score :: {Player.name(), player_score}
+  @typedoc "A serializable map assigning player scores to player names"
   @type scores :: %{Player.name() => player_score}
+  @typedoc "A summary struct for the Multi-Player Bingo game"
   @type t :: %Summary{
           squares: [[Square.t()]],
           scores: scores,
@@ -32,7 +39,7 @@ defmodule Buzzword.Bingo.Summary do
         }
 
   @doc """
-  Creates a `summary` from the given `game`.
+  Creates a summary struct from the given `game`.
   """
   @spec new(Game.t()) :: t | {:error, atom}
   def new(%Game{} = game) do
@@ -50,7 +57,7 @@ defmodule Buzzword.Bingo.Summary do
   def new(_game), do: {:error, :invalid_summary_arg}
 
   @doc """
-  Writes the given `summary` or `game` as a formatted table to standard out.
+  Writes the given summary or game struct as a formatted table to `:stdio`.
   """
   @spec print(Summary.t() | Game.t()) :: :ok
   defdelegate print(summary_or_game), to: Formatter
