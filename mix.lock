@@ -1,7 +1,7 @@
 %{
-  "buzzword_bingo_game": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_game.git", "cfcdd4d53671c1cedaedbaf5d0fd992e443d45cd", []},
+  "buzzword_bingo_game": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_game.git", "f2d1b9f92c1f1c10275af6594e156f884471eada", []},
   "buzzword_bingo_player": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_player.git", "9d91f011e3da492fd483f27b07f247906f509241", []},
-  "buzzword_bingo_square": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_square.git", "b76a8b1591c15294faa066424592729cea0b7aa2", []},
+  "buzzword_bingo_square": {:git, "https://github.com/RaymondLoranger/buzzword_bingo_square.git", "0beab4ac87fbd502b0b98e2e0436b0bc4f9ba67e", []},
   "buzzword_cache": {:git, "https://github.com/RaymondLoranger/buzzword_cache.git", "2d21969979e6a0677973971b343d84d94fc83088", []},
   "dialyxir": {:hex, :dialyxir, "1.1.0", "c5aab0d6e71e5522e77beff7ba9e08f8e02bad90dfbeffae60eaf0cb47e29488", [:mix], [{:erlex, ">= 0.2.6", [hex: :erlex, repo: "hexpm", optional: false]}], "hexpm", "07ea8e49c45f15264ebe6d5b93799d4dd56a44036cf42d0ad9c960bc266c0b9a"},
   "earmark_parser": {:hex, :earmark_parser, "1.4.18", "e1b2be73eb08a49fb032a0208bf647380682374a725dfb5b9e510def8397f6f2", [:mix], [], "hexpm", "114a0e85ec3cf9e04b811009e73c206394ffecfcc313e0b346de0d557774ee97"},
