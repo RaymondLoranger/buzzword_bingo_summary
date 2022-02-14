@@ -56,9 +56,6 @@ defmodule Buzzword.Bingo.Summary do
 
   def new(_game), do: {:error, :invalid_summary_arg}
 
-  @doc """
-  Writes the given summary or game struct as a formatted table to `:stdio`.
-  """
   @spec print(Summary.t() | Game.t()) :: :ok
   defdelegate print(summary_or_game), to: Formatter
 end
