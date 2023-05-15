@@ -4,7 +4,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
   def project do
     [
       app: :buzzword_bingo_summary,
-      version: "0.1.34",
+      version: "0.1.35",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Buzzword Bingo Summary",
@@ -21,7 +21,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
 
   defp description do
     """
-    A summary struct and functions for the _Multi-Player Buzzword Bingo_ game.
+    A summary struct and functions for the Multi-Player Buzzword Bingo game.
     """
   end
 
