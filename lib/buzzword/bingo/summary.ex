@@ -3,11 +3,11 @@
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Buzzword.Bingo.Summary do
   @moduledoc """
-  A summary struct and functions for the _Multi-Player Bingo_ game.
+  A summary struct and functions for the _Multi-Player Buzzword Bingo_ game.
 
   The summary struct contains the fields `squares`, `scores` and `winner`
-  representing the characteristics of a summary in the _Multi-Player Bingo_
-  game.
+  representing the characteristics of a summary in the _Multi-Player Buzzword
+  Bingo_ game.
 
   ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
   """
@@ -31,7 +31,7 @@ defmodule Buzzword.Bingo.Summary do
   @type score :: {Player.name(), player_score}
   @typedoc "A serializable map assigning player scores to player names"
   @type scores :: %{Player.name() => player_score}
-  @typedoc "A summary struct for the Multi-Player Bingo game"
+  @typedoc "A summary struct for the Multi-Player Buzzword Bingo game"
   @type t :: %Summary{
           squares: [[Square.t()]],
           scores: scores,
