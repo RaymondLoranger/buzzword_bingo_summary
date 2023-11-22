@@ -28,7 +28,7 @@ defmodule Buzzword.Bingo.SummaryTest do
       |> Game.mark_square("C3", joe)
 
     icy_moon = Game.new("icy-moon", 5)
-    bad_game = Game.new('bad-game', 4)
+    bad_game = Game.new(~c"bad-game", 4)
     games = %{icy_moon: icy_moon, bad_game: bad_game, won_game: won_game}
     players = %{joe: joe, jim: jim}
     %{games: games, players: players}
@@ -72,11 +72,6 @@ defmodule Buzzword.Bingo.SummaryTest do
                joe.name => %{color: joe.color, score: 606, marked: 3},
                jim.name => %{color: jim.color, score: 404, marked: 2}
              }
-    end
-
-    test "can be encoded by Poison", %{games: games} do
-      assert Summary.new(games.won_game) |> Poison.encode!() ==
-               ~s<{"winner":{"name":"Joe","color":"light_green"},"squares":[[{"points":101,"phrase":"A1","marked_by":{"name":"Joe","color":"light_green"}},{"points":102,"phrase":"A2","marked_by":null},{"points":103,"phrase":"A3","marked_by":{"name":"Jim","color":"light_cyan"}}],[{"points":201,"phrase":"B1","marked_by":null},{"points":202,"phrase":"B2","marked_by":{"name":"Joe","color":"light_green"}},{"points":203,"phrase":"B3","marked_by":null}],[{"points":301,"phrase":"C1","marked_by":{"name":"Jim","color":"light_cyan"}},{"points":302,"phrase":"C2","marked_by":null},{"points":303,"phrase":"C3","marked_by":{"name":"Joe","color":"light_green"}}]],"scores":{"Joe":{"score":606,"marked":3,"color":"light_green"},"Jim":{"score":404,"marked":2,"color":"light_cyan"}}}>
     end
 
     test "can be encoded by Jason", %{games: games} do
