@@ -74,8 +74,8 @@ defmodule Buzzword.Bingo.SummaryTest do
              }
     end
 
-    test "can be encoded by Jason", %{games: games} do
-      assert Summary.new(games.won_game) |> Jason.encode!() ==
+    test "can be encoded by JSON", %{games: games} do
+      assert Summary.new(games.won_game) |> JSON.encode!() ==
                ~s<{"squares":[[{"phrase":"A1","points":101,"marked_by":{"name":"Joe","color":"light_green"}},{"phrase":"A2","points":102,"marked_by":null},{"phrase":"A3","points":103,"marked_by":{"name":"Jim","color":"light_cyan"}}],[{"phrase":"B1","points":201,"marked_by":null},{"phrase":"B2","points":202,"marked_by":{"name":"Joe","color":"light_green"}},{"phrase":"B3","points":203,"marked_by":null}],[{"phrase":"C1","points":301,"marked_by":{"name":"Jim","color":"light_cyan"}},{"phrase":"C2","points":302,"marked_by":null},{"phrase":"C3","points":303,"marked_by":{"name":"Joe","color":"light_green"}}]],"scores":{"Jim":{"color":"light_cyan","score":404,"marked":2},"Joe":{"color":"light_green","score":606,"marked":3}},"winner":{"name":"Joe","color":"light_green"}}>
     end
   end

@@ -4,7 +4,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
   def project do
     [
       app: :buzzword_bingo_summary,
-      version: "0.1.42",
+      version: "0.1.43",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Buzzword Bingo Summary",
@@ -49,8 +49,7 @@ defmodule Buzzword.Bingo.Summary.MixProject do
       {:buzzword_bingo_square, "~> 0.1"},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
-      {:io_ansi_plus, "~> 0.1"},
-      {:jason, "~> 1.0"}
+      {:io_ansi_plus, "~> 0.1"}
     ]
   end
 end

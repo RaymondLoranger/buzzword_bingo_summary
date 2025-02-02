@@ -6,8 +6,8 @@ defmodule Buzzword.Bingo.Summary do
   A summary struct and functions for the _Multi-Player Buzzword Bingo_ game.
 
   The summary struct contains the fields `squares`, `scores` and `winner`
-  representing the characteristics of a summary in the _Multi-Player Buzzword
-  Bingo_ game.
+  representing the properties of a summary in the _Multi-Player Buzzword Bingo_
+  game.
 
   ##### Based on the course [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark.
   """
@@ -16,7 +16,7 @@ defmodule Buzzword.Bingo.Summary do
   alias __MODULE__.Formatter
   alias Buzzword.Bingo.{Game, Player, Square}
 
-  @derive Jason.Encoder
+  @derive JSON.Encoder
   @enforce_keys [:squares, :scores, :winner]
   defstruct [:squares, :scores, :winner]
 
