@@ -5,7 +5,12 @@ defmodule Buzzword.Bingo.Summary do
   @moduledoc """
   A summary struct and functions for the _Multi-Player Buzzword Bingo_ game.
 
-  The summary struct contains the fields `squares`, `scores` and `winner`
+  The summary struct contains the fields:
+
+    - `squares`
+    - `scores`
+    - `winner`
+
   representing the properties of a summary in the _Multi-Player Buzzword Bingo_
   game.
 
