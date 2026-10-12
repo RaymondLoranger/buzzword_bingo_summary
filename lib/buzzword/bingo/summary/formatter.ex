@@ -138,8 +138,7 @@ defmodule Buzzword.Bingo.Summary.Formatter do
   end
 
   defp print_bingo(nil) do
-    # [:deco_background, @dark, " 🙁  No Bingo (yet) ", :reset]
-    [:deco_background, @dark, " ☹ No Bingo (yet) ", :reset]
+    [:deco_background, @dark, " 🙁  No Bingo (yet) ", :reset]
     |> ANSI.puts()
   end
 end

@@ -9,8 +9,12 @@ defmodule Buzzword.Bingo.SummaryTest do
     joe = Player.new("Joe", "light_green")
     jim = Player.new("Jim", "light_cyan")
 
+    # "A1" "A2" "A3"
+    # "B1" "B2" "B3"
+    # "C1" "C2" "C3"
     won_game =
       Game.new("won-game", 3, [
+        # {phrase, points}
         {"A1", 101},
         {"A2", 102},
         {"A3", 103},
